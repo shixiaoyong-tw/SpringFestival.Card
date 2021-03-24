@@ -1,14 +1,23 @@
+using System;
+using Amazon.DynamoDBv2.DataModel;
+
 namespace SpringFestival.Card.Entity
 {
     /// <summary>
     /// 观众
     /// </summary>
-    public class Audience
+    [DynamoDBTable("Audience")]
+    public class Audience : RootEntity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public Guid CardId { get; set; }
+
+        /// <summary>
+        /// 投票次数
+        /// </summary>
+        public int Time { get; set; }
     }
 }

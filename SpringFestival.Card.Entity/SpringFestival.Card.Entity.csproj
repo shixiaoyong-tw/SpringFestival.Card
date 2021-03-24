@@ -4,4 +4,12 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SpringFestival.Card.Common\SpringFestival.Card.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.5.4.37" />
+    </ItemGroup>
+
 </Project>

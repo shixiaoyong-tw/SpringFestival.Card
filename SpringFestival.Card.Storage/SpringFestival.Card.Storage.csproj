@@ -4,4 +4,15 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
+      <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.5.4.37" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0-preview.2.21154.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SpringFestival.Card.Common\SpringFestival.Card.Common.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.Entity\SpringFestival.Card.Entity.csproj" />
+    </ItemGroup>
+
 </Project>

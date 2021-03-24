@@ -4,8 +4,18 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-<!--    <ItemGroup>-->
-<!--        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>-->
-<!--    </ItemGroup>-->
+    <ItemGroup>
+      <ProjectReference Include="..\SpringFestival.Card.Common\SpringFestival.Card.Common.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.Service\SpringFestival.Card.Service.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.UICommand\SpringFestival.Card.UICommand.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.ViewModel\SpringFestival.Card.ViewModel.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.5.4.37" />
+        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.101" />
+        <PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
 
 </Project>

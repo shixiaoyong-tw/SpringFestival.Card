@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace SpringFestival.Card.Entity.Enums
+namespace SpringFestival.Card.Common.Enums
 {
     /// <summary>
     /// 节目类型

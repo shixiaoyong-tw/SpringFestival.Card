@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace SpringFestival.Card.Entity.Enums
+namespace SpringFestival.Card.Common.Enums
 {
     public enum Gender
     {

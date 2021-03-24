@@ -1,18 +1,21 @@
-using SpringFestival.Card.Entity.Enums;
+using System;
+using Amazon.DynamoDBv2.DataModel;
+using SpringFestival.Card.Common.Enums;
 
 namespace SpringFestival.Card.Entity
 {
     /// <summary>
     /// 演员
     /// </summary>
-    public class Actor
+    [DynamoDBTable("Actor")]
+    public class Actor : RootEntity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int Age { get; set; }
 
         public Gender Gender { get; set; }
+
+        public Guid CardId { get; set; }
     }
 }

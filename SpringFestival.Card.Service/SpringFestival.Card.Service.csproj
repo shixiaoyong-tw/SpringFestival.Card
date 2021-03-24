@@ -4,4 +4,16 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SpringFestival.Card.Common\SpringFestival.Card.Common.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.Entity\SpringFestival.Card.Entity.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.Storage\SpringFestival.Card.Storage.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.UICommand\SpringFestival.Card.UICommand.csproj" />
+      <ProjectReference Include="..\SpringFestival.Card.ViewModel\SpringFestival.Card.ViewModel.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    </ItemGroup>
+
 </Project>

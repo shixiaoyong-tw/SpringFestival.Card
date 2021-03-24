@@ -1,15 +1,14 @@
-﻿using System;
-using SpringFestival.Card.Entity.Enums;
+﻿using Amazon.DynamoDBv2.DataModel;
+using SpringFestival.Card.Common.Enums;
 
 namespace SpringFestival.Card.Entity
 {
     /// <summary>
     /// 节目单
     /// </summary>
-    public class Card
+    [DynamoDBTable("Card")]
+    public class Card : RootEntity
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public CardType CardType { get; set; }
