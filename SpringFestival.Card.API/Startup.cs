@@ -48,7 +48,7 @@ namespace SpringFestival.Card.API
 
             services.AddAWSService<IAmazonDynamoDB>(Configuration.GetAWSOptions("DynamoDb"));
 
-            CreateTable();
+            // CreateTable();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,14 +83,18 @@ namespace SpringFestival.Card.API
                 ServiceURL = dynamoDbConfig.GetValue<string>("ServiceURL")
             };
             var client = new AmazonDynamoDBClient(clientConfig);
-            CreateTable("Card", "Id");
-            CreateTable("Audience", "Id");
+            CreateTable("Card", "EntityId");
+            CreateTable("Audience", "EntityId");
 
             void CreateTable(string tableName, string hashKey)
             {
                 // Low Level API: client
                 Console.WriteLine("Verify table => " + tableName);
                 var tableResponse = client.ListTablesAsync().Result;
+
+                // client.DeleteTableAsync(tableName);
+                // return;
+                
                 if (!tableResponse.TableNames.Contains(tableName))
                 {
                     Console.WriteLine("Table not found, creating table => " + tableName);

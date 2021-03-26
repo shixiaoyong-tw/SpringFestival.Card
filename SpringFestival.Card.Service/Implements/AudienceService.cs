@@ -62,7 +62,7 @@ namespace SpringFestival.Card.Service.Implements
             });
 
             var topThreeCards = cardsViewModel
-                .OrderByDescending(x => x.Time)
+                .OrderByDescending(x => int.Parse(x.Time))
                 .Take(3)
                 .ToList();
 

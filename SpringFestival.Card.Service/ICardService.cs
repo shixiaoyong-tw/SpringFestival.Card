@@ -19,7 +19,7 @@ namespace SpringFestival.Card.Service
         Task Delete(CardDeleteUICommand command);
 
         /// <summary>
-        /// vote result
+        /// 获取投票结果
         /// </summary>
         Task<List<CardVoteViewModel>> GetVoteResult();
     }

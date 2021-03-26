@@ -59,12 +59,12 @@ namespace SpringFestival.Card.Service.Implements
         {
             var cardForEdit = _mapper.Map<Entity.Card>(command);
 
-            // var card = await _cardRepository.Get(cardForEdit.Id);
-            //
-            // if (card == null)
-            // {
-            //     throw new Exception("card is not exist!");
-            // }
+            var card = await _cardRepository.Get(cardForEdit.Id);
+            
+            if (card == null)
+            {
+                throw new Exception("card is not exist!");
+            }
 
             await _cardRepository.Edit(cardForEdit);
         }
@@ -73,10 +73,10 @@ namespace SpringFestival.Card.Service.Implements
         {
             var card = await _cardRepository.Get(command.Id);
 
-            // if (card == null)
-            // {
-            //     throw new Exception("card is not exist!");
-            // }
+            if (card == null)
+            {
+                throw new Exception("card is not exist!");
+            }
 
             await _cardRepository.Delete(command.Id);
         }
