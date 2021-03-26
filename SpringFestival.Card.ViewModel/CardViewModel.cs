@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace SpringFestival.Card.ViewModel
 {
     public class CardViewModel

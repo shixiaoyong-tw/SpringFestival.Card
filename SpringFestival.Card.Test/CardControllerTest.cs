@@ -1,24 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using AutoFixture;
-using AutoFixture.AutoMoq;
 using AutoMapper;
-using GenFu;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using SpringFestival.Card.API.Controllers;
 using SpringFestival.Card.Common.Enums;
-using SpringFestival.Card.Entity;
 using SpringFestival.Card.Service;
-using SpringFestival.Card.Service.Implements;
-using SpringFestival.Card.Storage;
 using SpringFestival.Card.UICommand;
 using SpringFestival.Card.ViewModel;
 
@@ -80,7 +69,6 @@ namespace SpringFestival.Card.Test
             Assert.IsNotNull(result.Value);
         }
         
-
         [Test]
         public void CardController_PostCard_Should_Correct()
         {
@@ -106,18 +94,6 @@ namespace SpringFestival.Card.Test
             
             Assert.IsNotNull(result);
             Assert.AreEqual("/mocked", result.Location);
-        }
-    }
-
-    public static class AutoMap
-    {
-        public static IMapper Get()
-        {
-            var services = new ServiceCollection();
-            services.AddAutoMapper(typeof(AutoMapperProfile));
-            var scope = services.BuildServiceProvider().CreateScope();
-            var _mapper = scope.ServiceProvider.GetService<IMapper>();
-            return _mapper;
         }
     }
 }

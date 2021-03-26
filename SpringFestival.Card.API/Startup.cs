@@ -15,7 +15,6 @@ using SpringFestival.Card.Service.Implements;
 using SpringFestival.Card.Storage;
 using SpringFestival.Card.Storage.Implements;
 
-
 namespace SpringFestival.Card.API
 {
     public class Startup

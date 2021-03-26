@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SpringFestival.Card.Service;
 using SpringFestival.Card.UICommand;
+using SpringFestival.Card.ViewModel;
 
 namespace SpringFestival.Card.API.Controllers
 {
@@ -15,6 +16,14 @@ namespace SpringFestival.Card.API.Controllers
         public AudienceController(IAudienceService audienceService)
         {
             _audienceService = audienceService;
+        }
+
+        [HttpGet("lotteries")]
+        public async Task<ActionResult<List<AudienceLotteryViewModel>>> GetLotteryResult()
+        {
+            var lotteryResults = await _audienceService.Lottery();
+
+            return Ok(lotteryResults);
         }
 
         [HttpPost]

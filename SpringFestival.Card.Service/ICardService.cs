@@ -16,7 +16,7 @@ namespace SpringFestival.Card.Service
 
         Task Edit(CardEditUICommand command);
 
-        Task Delete(CardDeleteUICommand command);
+        Task Delete(Guid id);
 
         /// <summary>
         /// 获取投票结果

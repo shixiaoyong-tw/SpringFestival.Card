@@ -83,10 +83,10 @@ namespace SpringFestival.Card.API.Controllers
             return Created(new Uri($"{Request.Path}", UriKind.Relative), null);
         }
 
-        [HttpDelete]
-        public async Task<ActionResult> DeleteCard(CardDeleteUICommand command)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCard(Guid id)
         {
-            await _cardService.Delete(command);
+            await _cardService.Delete(id);
 
             return NoContent();
         }

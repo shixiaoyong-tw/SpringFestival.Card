@@ -29,7 +29,6 @@ namespace SpringFestival.Card.Service
                     opt =>
                         opt.MapFrom(src => src.Id.ToString()));
 
-
             CreateMap<Audience, AudienceLotteryViewModel>();
         }
     }

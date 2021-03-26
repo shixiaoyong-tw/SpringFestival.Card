@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace SpringFestival.Card.BFF
 {
@@ -13,9 +13,16 @@ namespace SpringFestival.Card.BFF
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient("github", c =>
+            services.AddControllers();
+            
+            services.AddHttpClient("spring.festival.card.api", c =>
             {
-                c.BaseAddress = new Uri("http://localhost:9000");
+                c.BaseAddress = new Uri("http://localhost:9001");
+            });
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "SpringFestival.Card.BFF", Version = "v1"});
             });
         }
 
@@ -26,13 +33,14 @@ namespace SpringFestival.Card.BFF
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SpringFestival.Card.BFF v1"));
+
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

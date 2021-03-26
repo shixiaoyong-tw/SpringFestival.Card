@@ -60,7 +60,7 @@ namespace SpringFestival.Card.Service.Implements
             var cardForEdit = _mapper.Map<Entity.Card>(command);
 
             var card = await _cardRepository.Get(cardForEdit.Id);
-            
+
             if (card == null)
             {
                 throw new Exception("card is not exist!");
@@ -69,16 +69,16 @@ namespace SpringFestival.Card.Service.Implements
             await _cardRepository.Edit(cardForEdit);
         }
 
-        public async Task Delete(CardDeleteUICommand command)
+        public async Task Delete(Guid id)
         {
-            var card = await _cardRepository.Get(command.Id);
+            var card = await _cardRepository.Get(id);
 
             if (card == null)
             {
                 throw new Exception("card is not exist!");
             }
 
-            await _cardRepository.Delete(command.Id);
+            await _cardRepository.Delete(id);
         }
 
         public async Task<List<CardVoteViewModel>> GetVoteResult()

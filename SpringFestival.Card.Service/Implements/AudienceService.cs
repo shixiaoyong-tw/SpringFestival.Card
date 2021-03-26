@@ -35,18 +35,31 @@ namespace SpringFestival.Card.Service.Implements
                 throw new Exception("the card does not exist！");
             }
 
-            var audience = await _audienceRepository.Get(audienceForVote.Id);
+            var audiences = await _audienceRepository.GetAll();
+
+            var audience = audiences.FirstOrDefault(x => x.PhoneNumber == audienceForVote.PhoneNumber);
+
+            if (audience != null && audience.CardId != audienceForVote.CardId)
+            {
+                throw new Exception("每一位观众只能对一个节目进行投票！");
+            }
+
             audienceForVote.Time = audience?.Time + 1 ?? 1;
 
             if (audienceForVote.Time > 3)
             {
-                throw new Exception("everyone can vote three times at most！");
+                throw new Exception("每一位观众最多能投三次票！");
             }
 
             if (audience == null)
+            {
                 await _audienceRepository.Add(audienceForVote);
+            }
             else
+            {
+                audienceForVote.Id = audience.Id;
                 await _audienceRepository.Edit(audienceForVote);
+            }
         }
 
         public async Task<List<AudienceLotteryViewModel>> Lottery()
