@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using SpringFestival.Card.Common;
-using SpringFestival.Card.Common.Enums;
 using SpringFestival.Card.UICommand;
 using SpringFestival.Card.ViewModel;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -19,8 +15,6 @@ namespace SpringFestival.Card.BFF.Controllers
     public class CardController : ControllerBase
     {
         private readonly IHttpClientFactory _clientFactory;
-
-        public List<CardViewModel> PullRequests { get; private set; }
 
         public CardController(IHttpClientFactory clientFactory)
         {
@@ -45,6 +39,52 @@ namespace SpringFestival.Card.BFF.Controllers
                         new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
 
                 return Ok(cards);
+            }
+
+            return NoContent();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CardViewModel>> GetCard(Guid id)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                $"api/cards/{id}");
+
+            var client = _clientFactory.CreateClient("spring.festival.card.api");
+
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await using var responseStream = await response.Content.ReadAsStreamAsync();
+                var card = await JsonSerializer.DeserializeAsync
+                    <CardViewModel>(responseStream,
+                        new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+
+                return Ok(card);
+            }
+
+            return NoContent();
+        }
+        
+        [HttpGet("votes")]
+        public async Task<ActionResult<List<CardVoteViewModel>>> GetVoteResult()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                "api/cards/votes");
+
+            var client = _clientFactory.CreateClient("spring.festival.card.api");
+
+            var response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await using var responseStream = await response.Content.ReadAsStreamAsync();
+                var cardVotes = await JsonSerializer.DeserializeAsync
+                    <List<CardVoteViewModel>>(responseStream,
+                        new JsonSerializerOptions {PropertyNameCaseInsensitive = true});
+
+                return Ok(cardVotes);
             }
 
             return NoContent();
